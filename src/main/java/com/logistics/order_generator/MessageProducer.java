@@ -29,15 +29,12 @@ public class MessageProducer {
     }
 
     private Order generateRandomOrder(){
-        byte[] array = new byte[7];
-        new Random().nextBytes(array);
-        String productName = new String(array, StandardCharsets.UTF_8);
-        new Random().nextBytes(array);
-        String description = new String(array, StandardCharsets.UTF_8);
-        new Random().nextBytes(array);
-        String destination = new String(array, StandardCharsets.UTF_8);
-        new Random().nextBytes(array);
-        String buyerName = new String(array, StandardCharsets.UTF_8);
+        Random ran = new Random();
+        FakeNames fakeNamesGenerator = new FakeNames();
+        String productName = fakeNamesGenerator.getProductName(ran.nextInt(10));
+        String description = fakeNamesGenerator.getDescription(ran.nextInt(10));
+        String destination = fakeNamesGenerator.getDestination(ran.nextInt(10));
+        String buyerName = fakeNamesGenerator.getName(ran.nextInt(10));
 
         return new Order(MESSAGE_COUNT, productName, description, destination, buyerName, LocalDateTime.now());
     }
